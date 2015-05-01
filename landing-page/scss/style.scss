@@ -51,6 +51,7 @@
 $sans-serif: 'Roboto', sans-serif;
 $red-dark-color: #991D1B;
 $red-light-color: #CC342D;
+$tablet: new-breakpoint(max-width 1024px);
 
 html {
   -webkit-font-smoothing: antialiased;
@@ -138,7 +139,7 @@ h2 {
 
 section.intro, section.goal, section.why {
   @include outer-container; 
-  padding: 100px 0 50px 0;
+  padding: 100px 0 0px 0;
   div.text {
     @include span-columns(6);
     h2 {
@@ -153,14 +154,30 @@ section.intro, section.goal, section.why {
       -webkit-text-stroke-width: 0.5px;
       -webkit-text-stroke-color: #555;
     }
+    @include media($tablet) {
+      @include span-columns(6);
+      padding-left: 3rem;
+      h2 {
+        font-size: 1.9rem;
+        line-height: 150%;
+      }
+      p {
+        font-size: 1.2rem;
+      }
+    }
   }
   div.shape-girl {
     @include span-columns(5);
+    @include omega();
     display: block;
     height: 480px;
     width: 480px;
     background-image: url(img/girl@2x.png);
     background-size: 560px 560px;
+    @include media($tablet) {
+      @include span-columns(6);
+      background-size: 480px 480px;
+    }
   }
   div.shape-girl-connect {
     @include span-columns(5);
@@ -169,6 +186,13 @@ section.intro, section.goal, section.why {
     width: 480px;
     background-image: url(img/girl-connect@2x.png);
     background-size: 459px 355px;
+    @include media($tablet) {
+      @include span-columns(5);
+      margin-left: 3rem;
+      width: 413px;
+      background-size: 413px 320px;
+      background-repeat: no-repeat;
+    }
   }
   div.shape-girl-share {
     @include span-columns(5);
@@ -177,12 +201,21 @@ section.intro, section.goal, section.why {
     width: 480px;
     background-image: url(img/girl-share@2x.png);
     background-size: 480px 480px;
+    @include media($tablet) {
+      @include span-columns(5);
+      width: 460px;
+      background-size: 460px 460px;
+      background-repeat: no-repeat;
+    }
   }
 }
 
 section.goal {
   div.text {
     padding-left: 40px;
+    @include media($tablet) {
+      padding-right: 1rem;
+    }
   }
 }
 
@@ -193,10 +226,9 @@ section.why {
 }
 
 section.goal, section.why {
-  padding-top: 40px;
   div.text {
     h2 {
-      padding-top: 2rem;
+      padding-top: 1rem;
     }
   }
 }
