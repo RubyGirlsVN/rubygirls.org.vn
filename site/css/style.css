@@ -1,0 +1,232 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100&subset=latin,vietnamese);
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after {
+  content: "";
+  content: none; }
+
+q:before, q:after {
+  content: "";
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+html {
+  box-sizing: border-box; }
+
+*, *::after, *::before {
+  box-sizing: inherit; }
+
+html {
+  -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  line-height: 180%; }
+
+a {
+  text-decoration: none; }
+
+header {
+  border-bottom: solid 2px #eee;
+  padding: 10px; }
+
+nav {
+  text-align: center; }
+
+.fixed {
+  position: fixed;
+  width: 100%;
+  background: #fff; }
+
+.logo {
+  text-align: center; }
+  .logo img {
+    width: 200px;
+    height: 60px; }
+
+.button {
+  border-radius: 4px;
+  background: #CC342D;
+  color: #fff;
+  transition: background .2s ease-in-out; }
+
+.request-invite {
+  padding: 14px 28px;
+  text-transform: uppercase; }
+  .request-invite:hover {
+    background: #991D1B; }
+
+.big {
+  padding: 24px 48px; }
+
+.sign-up {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding: 60px; }
+  .sign-up::after {
+    clear: both;
+    content: "";
+    display: table; }
+
+.left {
+  float: left; }
+
+.right {
+  float: right; }
+
+.clearfix {
+  clear: both; }
+
+h2 {
+  font-size: 2.4rem;
+  font-weight: 100;
+  margin-bottom: 3rem;
+  color: #333;
+  -webkit-text-stroke-width: 0.8px;
+  -webkit-text-stroke-color: black; }
+
+section.intro, section.goal, section.why {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 100px 0 0px 0; }
+  section.intro::after, section.goal::after, section.why::after {
+    clear: both;
+    content: "";
+    display: table; }
+  section.intro div.text, section.goal div.text, section.why div.text {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 48.821174201%; }
+    section.intro div.text:last-child, section.goal div.text:last-child, section.why div.text:last-child {
+      margin-right: 0; }
+    section.intro div.text h2, section.goal div.text h2, section.why div.text h2 {
+      padding-top: 6rem; }
+    section.intro div.text p, section.goal div.text p, section.why div.text p {
+      font-size: 1.5rem;
+      line-height: 180%;
+      font-weight: 100;
+      margin-bottom: 3rem;
+      color: #555;
+      -webkit-text-stroke-width: 0.5px;
+      -webkit-text-stroke-color: #555; }
+    @media screen and (max-width: 1024px) {
+      section.intro div.text, section.goal div.text, section.why div.text {
+        float: left;
+        display: block;
+        margin-right: 2.3576515979%;
+        width: 48.821174201%;
+        padding-left: 3rem; }
+        section.intro div.text:last-child, section.goal div.text:last-child, section.why div.text:last-child {
+          margin-right: 0; }
+        section.intro div.text h2, section.goal div.text h2, section.why div.text h2 {
+          font-size: 1.9rem;
+          line-height: 150%; }
+        section.intro div.text p, section.goal div.text p, section.why div.text p {
+          font-size: 1.2rem; } }
+  section.intro div.shape-girl, section.goal div.shape-girl, section.why div.shape-girl {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 40.2913699012%;
+    margin-right: 0;
+    display: block;
+    height: 480px;
+    width: 480px;
+    background-image: url(img/girl@2x.png);
+    background-size: 560px 560px; }
+    section.intro div.shape-girl:last-child, section.goal div.shape-girl:last-child, section.why div.shape-girl:last-child {
+      margin-right: 0; }
+    @media screen and (max-width: 1024px) {
+      section.intro div.shape-girl, section.goal div.shape-girl, section.why div.shape-girl {
+        float: left;
+        display: block;
+        margin-right: 2.3576515979%;
+        width: 48.821174201%;
+        background-size: 480px 480px; }
+        section.intro div.shape-girl:last-child, section.goal div.shape-girl:last-child, section.why div.shape-girl:last-child {
+          margin-right: 0; } }
+  section.intro div.shape-girl-connect, section.goal div.shape-girl-connect, section.why div.shape-girl-connect {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 40.2913699012%;
+    display: block;
+    height: 355px;
+    width: 480px;
+    background-image: url(img/girl-connect@2x.png);
+    background-size: 459px 355px; }
+    section.intro div.shape-girl-connect:last-child, section.goal div.shape-girl-connect:last-child, section.why div.shape-girl-connect:last-child {
+      margin-right: 0; }
+    @media screen and (max-width: 1024px) {
+      section.intro div.shape-girl-connect, section.goal div.shape-girl-connect, section.why div.shape-girl-connect {
+        float: left;
+        display: block;
+        margin-right: 2.3576515979%;
+        width: 40.2913699012%;
+        margin-left: 3rem;
+        width: 413px;
+        background-size: 413px 320px;
+        background-repeat: no-repeat; }
+        section.intro div.shape-girl-connect:last-child, section.goal div.shape-girl-connect:last-child, section.why div.shape-girl-connect:last-child {
+          margin-right: 0; } }
+  section.intro div.shape-girl-share, section.goal div.shape-girl-share, section.why div.shape-girl-share {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 40.2913699012%;
+    display: block;
+    height: 480px;
+    width: 480px;
+    background-image: url(img/girl-share@2x.png);
+    background-size: 480px 480px; }
+    section.intro div.shape-girl-share:last-child, section.goal div.shape-girl-share:last-child, section.why div.shape-girl-share:last-child {
+      margin-right: 0; }
+    @media screen and (max-width: 1024px) {
+      section.intro div.shape-girl-share, section.goal div.shape-girl-share, section.why div.shape-girl-share {
+        float: left;
+        display: block;
+        margin-right: 2.3576515979%;
+        width: 40.2913699012%;
+        width: 460px;
+        background-size: 460px 460px;
+        background-repeat: no-repeat; }
+        section.intro div.shape-girl-share:last-child, section.goal div.shape-girl-share:last-child, section.why div.shape-girl-share:last-child {
+          margin-right: 0; } }
+
+section.goal div.text {
+  padding-left: 40px; }
+  @media screen and (max-width: 1024px) {
+    section.goal div.text {
+      padding-right: 1rem; } }
+
+section.why div.text {
+  padding-right: 70px; }
+
+section.goal div.text h2, section.why div.text h2 {
+  padding-top: 1rem; }
