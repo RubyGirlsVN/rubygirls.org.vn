@@ -46,7 +46,8 @@
 @include meyer-reset;
 
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100&subset=latin,vietnamese);
-@import "bourbon", "neat";
+@import "bourbon",
+        "neat";
 
 $sans-serif: 'Roboto', sans-serif;
 $red-dark-color: #991D1B;
@@ -72,10 +73,6 @@ header {
   padding: 10px;
 }
 
-nav {
-  text-align: center;
-}
-
 .fixed {
   position: fixed;
   width: 100%;
@@ -83,7 +80,6 @@ nav {
 }
 
 .logo {
-  text-align: center;
   img {
     width: 200px;
     height: 60px;
@@ -231,4 +227,69 @@ section.goal, section.why {
       padding-top: 1rem;
     }
   }
+}
+
+.menu {
+  float: right;
+}
+
+.text-center {
+  text-align: center;
+}
+.menu li {
+  float: left;
+  padding: 20px;
+  text-transform: uppercase;
+}
+
+.menu li:not(:last-child):hover a {
+  color: #991D1B;
+  font-weight: bold;
+}
+
+.menu li:not(:last-child) a {
+  color: #CC342D;
+}
+
+.logo {
+  float: left;
+}
+
+.event h2,
+.note {
+  font-weight: bold;
+}
+
+.event h2 {
+  color: #CC342D;
+  margin: 50px 0;
+  text-transform: capitalize;
+  -webkit-text-stroke-width: 0;
+}
+
+.note {
+  color: #991D1B;
+}
+
+.content h3 {
+  font-size: 32px;
+  margin: 35px 0 10px;
+}
+
+.paragraph .detail {
+  font-size: 18px;
+  line-height: 36px;
+  padding-left: 30px;
+}
+
+.sub-paragraph .detail {
+  padding-left: 60px;
+}
+
+.content .detail::before {
+  content: "*";
+  color: #CC342D;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 5px;
 }
