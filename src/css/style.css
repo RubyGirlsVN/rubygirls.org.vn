@@ -1,71 +1,339 @@
-/*
-Error: Undefined mixin 'outer-container'.
-        on line 114 of scss/style.scss, in `outer-container'
-        from line 114 of scss/style.scss
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&subset=vietnamese);
+html {
+  box-sizing: border-box; }
 
-109: .big {
-110:   padding: 24px 48px;
-111: }
-112: 
-113: .sign-up {
-114:   @include outer-container; 
-115:   text-align: center;
-116:   padding: 60px;
-117: }
-118: 
-119: .left {
+*, *::after, *::before {
+  box-sizing: inherit; }
 
-Backtrace:
-scss/style.scss:114:in `outer-container'
-scss/style.scss:114
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:348:in `block in visit_mixin'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/stack.rb:98:in `block in with_mixin'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/stack.rb:115:in `with_frame'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/stack.rb:98:in `with_mixin'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:346:in `visit_mixin'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/base.rb:36:in `visit'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/stack.rb:79:in `block in with_base'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/stack.rb:115:in `with_frame'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/stack.rb:79:in `with_base'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:158:in `visit'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:430:in `block (2 levels) in visit_rule'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:430:in `map'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:430:in `block in visit_rule'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:428:in `visit_rule'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/base.rb:36:in `visit'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/stack.rb:79:in `block in with_base'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/stack.rb:115:in `with_frame'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/stack.rb:79:in `with_base'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:158:in `visit'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/base.rb:52:in `map'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/base.rb:52:in `visit_children'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/base.rb:36:in `block in visit'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/base.rb:36:in `visit'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:157:in `visit'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:8:in `visit'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/root_node.rb:36:in `css_tree'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/engine.rb:368:in `_render_with_sourcemap'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/engine.rb:285:in `render_with_sourcemap'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/exec/sass_scss.rb:407:in `run'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/exec/sass_scss.rb:63:in `process_result'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/exec/base.rb:52:in `parse'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/lib/sass/exec/base.rb:19:in `parse!'
-/Users/MyMai/.rvm/gems/ruby-2.2.0@global/gems/sass-3.4.13/bin/sass:13:in `<top (required)>'
-/Users/MyMai/.rvm/rubies/ruby-2.2.0/bin/sass:23:in `load'
-/Users/MyMai/.rvm/rubies/ruby-2.2.0/bin/sass:23:in `<main>'
-/Users/MyMai/.rvm/gems/ruby-2.2.0/bin/ruby_executable_hooks:15:in `eval'
-/Users/MyMai/.rvm/gems/ruby-2.2.0/bin/ruby_executable_hooks:15:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Undefined mixin 'outer-container'.\A         on line 114 of scss/style.scss, in `outer-container'\A         from line 114 of scss/style.scss\A \A 109: .big {\A 110:   padding: 24px 48px;\A 111: }\A 112: \A 113: .sign-up {\A 114:   @include outer-container; \A 115:   text-align: center;\A 116:   padding: 60px;\A 117: }\A 118: \A 119: .left {"; }
+html {
+  -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 16px;
+  line-height: 180%;
+  color: #333;
+  margin: 0;
+  padding: 0; }
+
+a {
+  text-decoration: none;
+  color: #CC342D;
+  padding-bottom: 3px; }
+  a:hover {
+    color: #CC342D;
+    border-bottom: solid 1px #CC342D; }
+
+header {
+  border-bottom: solid 2px #eee; }
+
+nav {
+  text-align: center; }
+  nav ul.top-menu {
+    padding: 0 1rem;
+    list-style: none;
+    margin-left: 0; }
+    nav ul.top-menu li {
+      display: inline-block;
+      padding: 0 1rem; }
+      nav ul.top-menu li a {
+        text-transform: uppercase;
+        color: #696969;
+        font-weight: 400;
+        transition: all .2s ease-in-out; }
+        nav ul.top-menu li a:hover {
+          color: #333; }
+
+.wrapper {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto; }
+  .wrapper::after {
+    clear: both;
+    content: "";
+    display: table; }
+
+.fixed {
+  position: fixed;
+  height: 67px;
+  width: 100%;
+  background: #fff; }
+
+.logo {
+  margin: 0;
+  padding: 0;
+  float: left; }
+  .logo img {
+    width: 200px;
+    height: 60px; }
+
+.button {
+  border-radius: 4px;
+  background: #CC342D;
+  color: #fff !important;
+  transition: background .2s ease-in-out; }
+
+.request-invite {
+  padding: 7px 21px;
+  text-transform: uppercase; }
+  .request-invite:hover {
+    background: #991D1B; }
+
+.big {
+  padding: 24px 48px; }
+
+.sign-up {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding: 60px; }
+  .sign-up::after {
+    clear: both;
+    content: "";
+    display: table; }
+
+.left {
+  float: left; }
+
+.right {
+  float: right; }
+
+.clearfix {
+  clear: both; }
+
+h2 {
+  font-size: 2.4rem;
+  font-weight: 300;
+  margin-bottom: 3rem;
+  color: #333; }
+
+section.intro, section.goal, section.why {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 100px 0 0px 0; }
+  section.intro::after, section.goal::after, section.why::after {
+    clear: both;
+    content: "";
+    display: table; }
+  section.intro div.text, section.goal div.text, section.why div.text {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 57.3509785009%; }
+    section.intro div.text:last-child, section.goal div.text:last-child, section.why div.text:last-child {
+      margin-right: 0; }
+    section.intro div.text h2, section.goal div.text h2, section.why div.text h2 {
+      padding-top: 5%;
+      color: #CC342D;
+      font-weight: 400; }
+    section.intro div.text p, section.goal div.text p, section.why div.text p {
+      width: 90%;
+      font-size: 1.5rem;
+      line-height: 180%;
+      font-weight: 100;
+      margin-bottom: 3rem;
+      color: #555; }
+    @media screen and (max-width: 1024px) {
+      section.intro div.text, section.goal div.text, section.why div.text {
+        float: left;
+        display: block;
+        margin-right: 2.3576515979%;
+        width: 57.3509785009%;
+        padding: 0 1.5rem; }
+        section.intro div.text:last-child, section.goal div.text:last-child, section.why div.text:last-child {
+          margin-right: 0; }
+        section.intro div.text h2, section.goal div.text h2, section.why div.text h2 {
+          font-size: 1.9rem;
+          line-height: 150%; }
+        section.intro div.text p, section.goal div.text p, section.why div.text p {
+          font-size: 1.2rem; } }
+  section.intro div.shape-girl, section.goal div.shape-girl, section.why div.shape-girl {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 31.7615656014%;
+    display: block;
+    height: 420px;
+    width: 420px;
+    margin-top: -5%;
+    background-image: url(img/girl@2x.png);
+    background-size: 420px 420px; }
+    section.intro div.shape-girl:last-child, section.goal div.shape-girl:last-child, section.why div.shape-girl:last-child {
+      margin-right: 0; }
+    @media screen and (max-width: 1024px) {
+      section.intro div.shape-girl, section.goal div.shape-girl, section.why div.shape-girl {
+        float: left;
+        display: block;
+        margin-right: 2.3576515979%;
+        width: 40.2913699012%;
+        background-size: 400px 400px; }
+        section.intro div.shape-girl:last-child, section.goal div.shape-girl:last-child, section.why div.shape-girl:last-child {
+          margin-right: 0; } }
+  section.intro div.shape-girl-connect, section.goal div.shape-girl-connect, section.why div.shape-girl-connect {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 40.2913699012%;
+    display: block;
+    height: 355px;
+    width: 480px;
+    background-image: url(img/girl-connect@2x.png);
+    background-size: 459px 355px; }
+    section.intro div.shape-girl-connect:last-child, section.goal div.shape-girl-connect:last-child, section.why div.shape-girl-connect:last-child {
+      margin-right: 0; }
+    @media screen and (max-width: 1024px) {
+      section.intro div.shape-girl-connect, section.goal div.shape-girl-connect, section.why div.shape-girl-connect {
+        float: left;
+        display: block;
+        margin-right: 2.3576515979%;
+        width: 40.2913699012%;
+        margin-left: 3rem;
+        width: 413px;
+        background-size: 413px 320px;
+        background-repeat: no-repeat; }
+        section.intro div.shape-girl-connect:last-child, section.goal div.shape-girl-connect:last-child, section.why div.shape-girl-connect:last-child {
+          margin-right: 0; } }
+  section.intro div.shape-girl-share, section.goal div.shape-girl-share, section.why div.shape-girl-share {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 40.2913699012%;
+    display: block;
+    height: 480px;
+    width: 480px;
+    background-image: url(img/girl-share@2x.png);
+    background-size: 480px 480px; }
+    section.intro div.shape-girl-share:last-child, section.goal div.shape-girl-share:last-child, section.why div.shape-girl-share:last-child {
+      margin-right: 0; }
+    @media screen and (max-width: 1024px) {
+      section.intro div.shape-girl-share, section.goal div.shape-girl-share, section.why div.shape-girl-share {
+        float: left;
+        display: block;
+        margin-right: 2.3576515979%;
+        width: 40.2913699012%;
+        width: 460px;
+        background-size: 460px 460px;
+        background-repeat: no-repeat; }
+        section.intro div.shape-girl-share:last-child, section.goal div.shape-girl-share:last-child, section.why div.shape-girl-share:last-child {
+          margin-right: 0; } }
+
+section.goal div.text {
+  padding-left: 40px; }
+  @media screen and (max-width: 1024px) {
+    section.goal div.text {
+      padding-right: 1rem; } }
+
+section.why div.text {
+  padding-right: 70px; }
+
+section.goal div.text h2, section.why div.text h2 {
+  padding-top: 1rem; }
+
+section.benefits {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto; }
+  section.benefits::after {
+    clear: both;
+    content: "";
+    display: table; }
+  section.benefits h3 {
+    color: #333; }
+  section.benefits span {
+    display: block;
+    line-height: 3rem; }
+  section.benefits .why, section.benefits .goal {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 31.7615656014%;
+    padding: 0 1rem; }
+    section.benefits .why:last-child, section.benefits .goal:last-child {
+      margin-right: 0; }
+    section.benefits .why p, section.benefits .goal p {
+      color: #696969; }
+    @media screen and (max-width: 1024px) {
+      section.benefits .why, section.benefits .goal {
+        float: left;
+        display: block;
+        margin-right: 2.3576515979%;
+        width: 40.2913699012%;
+        margin-left: 3rem; }
+        section.benefits .why:last-child, section.benefits .goal:last-child {
+          margin-right: 0; } }
+  section.benefits div.shape-girl-share {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 31.7615656014%;
+    display: block;
+    height: 280px;
+    width: 280px;
+    background-image: url(img/girl-share@2x.png);
+    background-size: 280px 280px; }
+    section.benefits div.shape-girl-share:last-child {
+      margin-right: 0; }
+    @media screen and (max-width: 1024px) {
+      section.benefits div.shape-girl-share {
+        display: none; } }
+
+section.cta {
+  margin-top: 4rem;
+  background: #CC342D;
+  padding: 3rem;
+  width: 100%;
+  text-align: center; }
+  section.cta h2 {
+    color: #fff;
+    margin: 0;
+    line-height: 5rem;
+    font-weight: 400; }
+  section.cta span {
+    color: #f2f2f2;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1.5rem;
+    width: 30%;
+    font-size: 1.2rem;
+    font-weight: 300; }
+    @media screen and (max-width: 1024px) {
+      section.cta span {
+        width: 70%; } }
+  section.cta .request-invite {
+    background: white;
+    color: #CC342D !important; }
+
+.sponsors {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4rem; }
+  .sponsors::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .sponsors .text {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 31.7615656014%; }
+    .sponsors .text:last-child {
+      margin-right: 0; }
+  .sponsors .partner {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 31.7615656014%; }
+    .sponsors .partner:last-child {
+      margin-right: 0; }
+    .sponsors .partner img {
+      float: right;
+      margin-left: .5rem; }
+    .sponsors .partner p {
+      display: block;
+      margin: 2rem 0; }
+    .sponsors .partner a {
+      font-weight: bold;
+      color: #CC342D; }

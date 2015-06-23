@@ -43,16 +43,17 @@
   }
 }
 
-@include meyer-reset;
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&subset=vietnamese);
+@import "bourbon", "neat";
 
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100&subset=latin,vietnamese);
-@import "bourbon",
-        "neat";
-
-$sans-serif: 'Roboto', sans-serif;
+$sans-serif: 'Source Sans Pro', sans-serif;
+$lighter-black: #696969;
+$black: #333;
 $red-dark-color: #991D1B;
 $red-light-color: #CC342D;
+
 $tablet: new-breakpoint(max-width 1024px);
+$mobile: new-breakpoint(max-width 480px);
 
 html {
   -webkit-font-smoothing: antialiased;
@@ -62,24 +63,62 @@ body {
   font-family: $sans-serif;
   font-size: 16px;
   line-height: 180%;
+  color: $black;
+  margin: 0;
+  padding: 0;
 }
 
 a {
   text-decoration: none;
+  color: $red-light-color;
+  padding-bottom: 3px;
+  &:hover {
+    color: $red-light-color;
+    border-bottom: solid 1px $red-light-color;
+  }
 }
 
 header {
   border-bottom: solid 2px #eee;
-  padding: 10px;
+}
+
+nav {
+  text-align: center;
+  ul.top-menu {
+    padding: 0 1rem;
+    list-style: none;
+    margin-left: 0;
+    li {
+      display: inline-block;
+      padding: 0 1rem;
+      a {
+        text-transform: uppercase;
+        color: $lighter-black;
+        font-weight: 400;
+        transition: all .2s ease-in-out;
+        &:hover {
+          color: $black;
+        }
+      }
+    }
+  }
+}
+
+.wrapper {
+  @include outer-container;
 }
 
 .fixed {
   position: fixed;
+  height: 67px;
   width: 100%;
   background: #fff;
 }
 
 .logo {
+  margin: 0;
+  padding: 0;
+  float: left;
   img {
     width: 200px;
     height: 60px;
@@ -89,12 +128,12 @@ header {
 .button {
   border-radius: 4px;
   background: $red-light-color;
-  color: #fff;
+  color: #fff !important;
   transition: background .2s ease-in-out;
 }
 
 .request-invite {
-  padding: 14px 28px;
+  padding: 7px 21px;
   text-transform: uppercase;
   &:hover {
     background: $red-dark-color;
@@ -125,11 +164,9 @@ header {
 
 h2 {
   font-size: 2.4rem;
-  font-weight: 100;
+  font-weight: 300;
   margin-bottom: 3rem;
   color: #333;
-  -webkit-text-stroke-width: 0.8px;
-  -webkit-text-stroke-color: black;
 
 }
 
@@ -137,22 +174,23 @@ section.intro, section.goal, section.why {
   @include outer-container; 
   padding: 100px 0 0px 0;
   div.text {
-    @include span-columns(6);
+    @include span-columns(7);
     h2 {
-      padding-top: 6rem;
+      padding-top: 5%;
+      color: $red-light-color;
+      font-weight: 400;
     }
     p {
+      width: 90%;
       font-size: 1.5rem;
       line-height: 180%;
       font-weight: 100;
       margin-bottom: 3rem;
       color: #555;
-      -webkit-text-stroke-width: 0.5px;
-      -webkit-text-stroke-color: #555;
     }
     @include media($tablet) {
-      @include span-columns(6);
-      padding-left: 3rem;
+      @include span-columns(7);
+      padding: 0 1.5rem;
       h2 {
         font-size: 1.9rem;
         line-height: 150%;
@@ -163,16 +201,16 @@ section.intro, section.goal, section.why {
     }
   }
   div.shape-girl {
-    @include span-columns(5);
-    @include omega();
+    @include span-columns(4);
     display: block;
-    height: 480px;
-    width: 480px;
+    height: 420px;
+    width: 420px;
+    margin-top: -5%;
     background-image: url(img/girl@2x.png);
-    background-size: 560px 560px;
+    background-size: 420px 420px;
     @include media($tablet) {
-      @include span-columns(6);
-      background-size: 480px 480px;
+      @include span-columns(5);
+      background-size: 400px 400px;
     }
   }
   div.shape-girl-connect {
@@ -229,67 +267,89 @@ section.goal, section.why {
   }
 }
 
-.menu {
-  float: right;
+section.benefits {
+  @include outer-container; 
+  h3 {
+    color: $black;
+  }
+  span {
+    display: block;
+    line-height: 3rem;
+  }
+  .why, .goal {
+    @include span-columns(4);
+    padding: 0 1rem;
+    p {
+      color: $lighter-black;
+    }
+    @include media($tablet) {
+      @include span-columns(5);
+      margin-left: 3rem;
+    }
+  }
+  div.shape-girl-share {
+    @include span-columns(4);
+    display: block;
+    height: 280px;
+    width: 280px;
+    background-image: url(img/girl-share@2x.png);
+    background-size: 280px 280px;
+    @include media($tablet) {
+      display: none;
+    }
+  }
 }
 
-.text-center {
+section.cta {
+  margin-top: 4rem;
+  background: $red-light-color;
+  padding: 3rem;
+  width: 100%;
   text-align: center;
-}
-.menu li {
-  float: left;
-  padding: 20px;
-  text-transform: uppercase;
-}
-
-.menu li:not(:last-child):hover a {
-  color: #991D1B;
-  font-weight: bold;
-}
-
-.menu li:not(:last-child) a {
-  color: #CC342D;
-}
-
-.logo {
-  float: left;
-}
-
-.event h2,
-.note {
-  font-weight: bold;
-}
-
-.event h2 {
-  color: #CC342D;
-  margin: 50px 0;
-  text-transform: capitalize;
-  -webkit-text-stroke-width: 0;
+  h2 {
+    color: #fff;
+    margin: 0;
+    line-height: 5rem;
+    font-weight: 400;
+  }
+  span {
+    color: #f2f2f2;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1.5rem;
+    width: 30%;
+    font-size: 1.2rem;
+    font-weight: 300;
+    @include media($tablet) {
+      width: 70%;
+    }
+  }
+  .request-invite {
+    background: white;
+    color: $red-light-color !important;
+  }
 }
 
-.note {
-  color: #991D1B;
-}
+.sponsors {
+  @include outer-container; 
+  margin-top: 4rem;
 
-.content h3 {
-  font-size: 32px;
-  margin: 35px 0 10px;
-}
-
-.paragraph .detail {
-  font-size: 18px;
-  line-height: 36px;
-  padding-left: 30px;
-}
-
-.sub-paragraph .detail {
-  padding-left: 60px;
-}
-
-.content .detail::before {
-  content: "*";
-  color: #CC342D;
-  font-weight: bold;
-  font-size: 18px;
-  padding: 5px;
+  .text {
+    @include span-columns(4);
+  }
+  .partner {
+    @include span-columns(4);
+    img {
+      float: right;
+      margin-left: .5rem;
+    }
+    p {
+      display: block;
+      margin: 2rem 0;
+    }
+    a {
+      font-weight: bold;
+      color: $red-light-color;
+    }
+  }
 }
