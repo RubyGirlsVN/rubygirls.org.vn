@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Touristic Autism-friendly Spots App - Rails Girls</title>
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="/js/prefixfree.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <script src="/js/jquery.cookie.js"></script>
+    <script src="/js/guides.js"></script>
+    <link href="/css/bootstrap.css" rel="stylesheet" />
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet" />
+    <link href="/css/code.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
+    <link href="/favicon.png" rel="shortcut icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <a class="span3" href="/" id="logo">
+          <img alt="Rails Girls Guides" src="/images/railsgirls-guides.png" />
+        </a>
+        <nav></nav>
+      </div>
+    </header>
+    <article class="container">
+      <div class="span10">
+        <h1 id="show-all-places-in-a-google-map">Show All Places in a Google Map</h1>
+
+<p><em>Created by Myriam Leggieri, <a href="https://twitter.com/iammyr">@iammyr</a></em>
+<em>for <a href="https://github.com/RailsGirlsGalway">Rails Girls Galway</a></em>
+The basic guides that have been merged and adapted are the <a href="http://www.railstutorial.org/book">Ruby on Rails Tutorial</a>, the <a href="http://guides.railsgirls.com/app/">basic RailsGirls app</a> and the tutorials for <a href="http://guides.railsgirls.com/thumbnails">creating thumbnails</a>, <a href="http://guides.railsgirls.com/devise/">authenticating users</a>, <a href="http://guides.railsgirls.com/design">adding design</a>, <a href="http://guides.railsgirls.com/openshift/">deploying to OpenShift</a> and <a href="http://guides.railsgirls.com/commenting">adding comments</a>.</p>
+
+<p>We need to install a piece of software to let us display and interact with Google Maps.</p>
+
+<p>Open <code>Gemfile</code> in the project directory using your text editor and add</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">gem</span> <span class="s1">&#39;gmaps4rails&#39;</span></code></pre></div>
+
+<p>Bundle as usual. Then add to a new app/model/marker.rb file:</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">class Marker
+
+  include ActiveModel::Validations
+  include Gmaps4rails::ActsAsGmappable
+
+  acts_as_gmappable :position <span class="o">=</span>&gt; :location
+
+  attr_accessor :location
+
+    def gmaps4rails_infowindow
+      <span class="s1">&#39;foo&#39;</span>
+    end
+
+end</code></pre></div>
+
+<p>Then add to config/application.rb within your project block:</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">config.active_support.escape_html_entities_in_json <span class="o">=</span> <span class="nb">true</span>
+config.encoding <span class="o">=</span> <span class="s2">&quot;utf-8&quot;</span>
+config.filter_parameters +<span class="o">=</span> <span class="o">[</span>:password<span class="o">]</span>
+config.assets.enabled <span class="o">=</span> <span class="nb">true</span>
+config.assets.version <span class="o">=</span> <span class="s1">&#39;1.0&#39;</span></code></pre></div>
+
+<p>Create your app/controllers/google_controller.rb:</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">class GoogleController &lt; ApplicationController
+  def index<span class="p">;</span> end
+
+  def markers
+    @marker <span class="o">||=</span> <span class="o">(</span>1..10<span class="o">)</span>.map <span class="o">{</span>
+      <span class="nv">m</span> <span class="o">=</span> Marker.new
+      m.location <span class="o">=</span> <span class="o">[</span> <span class="o">(</span>Random.new.rand<span class="o">(</span>-5000..5000<span class="o">)</span> / 100.0<span class="o">)</span>,<span class="o">(</span>Random.new.rand<span class="o">(</span>-5000..5000<span class="o">)</span> / 100.0<span class="o">)</span> <span class="o">]</span>
+      m
+    <span class="o">}</span>.to_gmaps4rails
+  end
+  helper_method :markers
+
+end</code></pre></div>
+
+<p>Create your view/google/index.html.erb:</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">&lt;h1&gt;See some marker on your map by default&lt;/h1&gt;
+&lt;div <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;google_map&quot;</span>&gt;&lt;/div&gt;
+&lt;%<span class="o">=</span> gmaps<span class="o">(</span><span class="s2">&quot;markers&quot;</span> <span class="o">=</span>&gt; <span class="o">{</span><span class="s2">&quot;data&quot;</span> <span class="o">=</span>&gt; markers<span class="o">}</span>,
+          <span class="s1">&#39;last_map&#39;</span> <span class="o">=</span>&gt; <span class="nb">false</span>,
+          <span class="s2">&quot;map_options&quot;</span> <span class="o">=</span>&gt;  <span class="o">{</span>
+            <span class="s2">&quot;center_on_user&quot;</span> <span class="o">=</span>&gt; <span class="nb">true</span>,
+            <span class="s2">&quot;detect_location&quot;</span> <span class="o">=</span>&gt; <span class="nb">true</span>,
+            <span class="s2">&quot;provider&quot;</span> <span class="o">=</span>&gt; <span class="s2">&quot;google&quot;</span>, :id <span class="o">=</span>&gt; <span class="s1">&#39;google_map&#39;</span><span class="o">})</span> %&gt;
+
+&lt;h1&gt;See on OpenLayer&lt;/h1&gt;
+&lt;div <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;openlayer_map&quot;</span>&gt;&lt;/div&gt;
+
+&lt;%<span class="o">=</span> gmaps<span class="o">(</span><span class="s2">&quot;markers&quot;</span> <span class="o">=</span>&gt; <span class="o">{</span><span class="s2">&quot;data&quot;</span> <span class="o">=</span>&gt; markers<span class="o">}</span>,
+          <span class="s2">&quot;map_options&quot;</span> <span class="o">=</span>&gt;  <span class="o">{</span>
+  <span class="s2">&quot;center_on_user&quot;</span> <span class="o">=</span>&gt; <span class="nb">true</span>,
+  <span class="s2">&quot;detect_location&quot;</span> <span class="o">=</span>&gt; <span class="nb">true</span>,
+  <span class="s2">&quot;provider&quot;</span> <span class="o">=</span>&gt; <span class="s2">&quot;openlayers&quot;</span>, :id <span class="o">=</span>&gt; <span class="s1">&#39;openlayer_map&#39;</span><span class="o">})</span> %&gt;</code></pre></div>
+
+<p>Add the following in app/views/application.html.erb after “&lt;%= yield %&gt;”:</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">&lt;%<span class="o">=</span> yield :scripts %&gt;</code></pre></div>
+
+<p>Finally add the following to your config/routes.rb:</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">get <span class="s1">&#39;/google&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;google#index&#39;</span>
+  root :to <span class="o">=</span>&gt; <span class="s1">&#39;google#index&#39;</span></code></pre></div>
+
+
+      </div>
+    </article>
+    <footer>
+      <p>
+        This work is licensed under a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0 License</a>
+      </p>
+      <p>
+        <a href="http://railsgirls.com">Rails Girls</a>
+        &middot; Crafted with excitement from Helsinki, Finland &middot; Follow us on
+        <a href="http://twitter.com/railsgirls">Twitter</a>
+        and
+        <a href="https://www.facebook.com/railsgirls">Facebook</a>
+      </p>
+    </footer>
+    <script type="text/javascript">
+      //<![CDATA[
+        var _gaq = _gaq || [];
+        _gaq.push(["_setAccount", "UA-19631067-3"]);
+        _gaq.push(["_trackPageview"]);
+
+        (function() {
+          var ga = document.createElement("script"); ga.type = "text/javascript"; ga.async = true;
+          ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";
+          var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      //]]>
+    </script>
+  </body>
+</html>

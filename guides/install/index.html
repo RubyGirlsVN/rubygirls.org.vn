@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Setup recipe for Rails Girls - Rails Girls</title>
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="/js/prefixfree.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <script src="/js/jquery.cookie.js"></script>
+    <script src="/js/guides.js"></script>
+    <link href="/css/bootstrap.css" rel="stylesheet" />
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet" />
+    <link href="/css/code.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
+    <link href="/favicon.png" rel="shortcut icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <a class="span3" href="/" id="logo">
+          <img alt="Rails Girls Guides" src="/images/railsgirls-guides.png" />
+        </a>
+        <nav></nav>
+      </div>
+    </header>
+    <article class="container">
+      <div class="span10">
+        <h1 id="setup-recipe-for-rails-girls">Setup recipe for Rails Girls</h1>
+<p><span class="muted">Cooking time: 5min active / 15-30min passive</span></p>
+
+<p>To build apps and other things with Ruby on Rails, we need to setup some software and the developer environment for your computer.</p>
+
+<p>Follow the instructions for your operating system. If you run into any problems, don’t panic. Inform us at the event and we can solve it together.</p>
+
+<ul>
+  <li><a href="#setup-for-os-x">Setup for OS X</a></li>
+  <li><a href="#setup-for-windows">Setup for Windows</a></li>
+  <li><a href="#setup-for-linux">Setup for Linux</a></li>
+  <li><a href="#virtual-machine">Alternative Installment for all OS</a></li>
+  <li><a href="#using-a-cloud-service">Using a Cloud Service - No Installation Required</a></li>
+</ul>
+
+<hr />
+
+<h2 id="setup-for-os-x">Setup for OS X</h2>
+
+<h3 id="let8217s-check-the-version-of-the-operating-system"><em>1.</em> Let’s check the version of the operating system.</h3>
+
+<p>Click the Apple menu and choose <em>About this Mac</em>.</p>
+
+<p><img src="/images/1.png" alt="Apple menu" title="Apple menu" /></p>
+
+<h3 id="in-the-window-you-will-find-the-version-of-your-operating-system"><em>2.</em> In the window you will find the version of your operating system.</h3>
+<p>If your version number starts with 10.6, 10.7, 10.8, 10.9 or 10.10 this guide is for you. If it’s something else, we can setup your machine at the event.</p>
+
+<p><img src="/images/2.png" alt="About this Mac dialog" title="About this Mac dialog" /></p>
+
+<h3 id="a-if-your-os-x-version-is-109-or-higher"><em>3a.</em> If your OS X version is 10.9 or higher:</h3>
+
+<p>If your version number starts with 10.9 or 10.10, follow these steps. We are installing homebrew and rbenv.</p>
+
+<h4 id="a1-install-command-line-tools-on-terminal"><em>3a1.</em> Install Command line tools on terminal:</h4>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">xcode-select --install</code></pre></div>
+
+<h4 id="a2-install-homebrewhttpbrewsh"><em>3a2.</em> Install <a href="http://brew.sh/">Homebrew</a>:</h4>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">ruby -e <span class="s2">&quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span></code></pre></div>
+
+<h4 id="a3-install-rbenvhttpsgithubcomsstephensonrbenv"><em>3a3.</em> Install <a href="https://github.com/sstephenson/rbenv">rbenv</a>:</h4>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">brew update
+brew install rbenv rbenv-gem-rehash ruby-build
+<span class="nb">echo</span> <span class="s1">&#39;eval &quot;$(rbenv init -)&quot;&#39;</span> &gt;&gt; ~/.bash_profile
+<span class="nb">echo</span> <span class="s1">&#39;export PATH=&quot;$HOME/.rbenv/shims:$PATH&quot;&#39;</span> &gt;&gt; ~/.bash_profile
+<span class="nb">source</span> ~/.bash_profile</code></pre></div>
+
+<h4 id="a4-build-ruby-with-rbenv"><em>3a4.</em> Build Ruby with rbenv:</h4>
+
+<p>You can find the newest version of Ruby with the command “rbenv install -l”.</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">rbenv install 2.2.0</code></pre></div>
+
+<p>If you got “OpenSSL::SSL::SSLError: … : certificate verify failed” error, try it this way.</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">brew install curl-ca-bundle
+cp /usr/local/opt/curl-ca-bundle/share/ca-bundle.crt <span class="sb">`</span>ruby -ropenssl -e <span class="s1">&#39;puts OpenSSL::X509::DEFAULT_CERT_FILE&#39;</span><span class="sb">`</span></code></pre></div>
+
+<h4 id="a5-set-default-ruby"><em>3a5.</em> Set default Ruby:</h4>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">rbenv global 2.2.0</code></pre></div>
+
+<h4 id="a6-install-rails"><em>3a6.</em> Install rails:</h4>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">gem i rails --no-ri --no-rdoc</code></pre></div>
+
+<h3 id="b-if-your-os-x-version-is-106-107-or-108"><em>3b.</em> If your OS X version is 10.6, 10.7, or 10.8:</h3>
+<p>Download the RailsInstaller for your version of OS X:</p>
+
+<ul>
+  <li><a href="http://railsinstaller.s3.amazonaws.com/RailsInstaller-1.0.4-osx-10.7.app.tgz">RailsInstaller for 10.7 and 10.8</a> <span class="muted">(325MB)</span></li>
+  <li><a href="http://railsinstaller.s3.amazonaws.com/RailsInstaller-1.0.4-osx-10.6.app.tgz">RailsInstaller for 10.6</a> <span class="muted">(224MB)</span></li>
+</ul>
+
+<p>Double click the downloaded file and it will unpack it into the current directory. Double click the the newly unpacked ‘RailsInstaller-1.0.4-osx-10.7.app’ or ‘RailsInstaller-1.0.4-osx-10.6.app’ and follow the instructions. It will open a README file with ‘Rails Installer OS X’ at the top. Please <strong>ignore</strong> the instructions in this file.</p>
+
+<p>If the Rails version wasn’t the latest, you could update it using a following command on terminal.</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">gem update rails --no-ri --no-rdoc</code></pre></div>
+
+<p>Make sure that all works well by running the application generator command.</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">rails new railsgirls</code></pre></div>
+
+<h3 id="install-a-text-editor-to-edit-code-files"><em>4.</em> Install a text editor to edit code files</h3>
+
+<p>For the workshop we recommend the text editor Atom.</p>
+
+<ul>
+  <li><a href="https://atom.io/">Download Atom and install it</a></li>
+</ul>
+
+<p>If you are using Mac OS X 10.7 or older versions, you can use another editor <a href="http://www.sublimetext.com/2">Sublime Text 2</a>.</p>
+
+<h3 id="update-your-browser"><em>5.</em> Update your browser</h3>
+
+<p>Open <a href="http://whatbrowser.org">whatbrowser.org</a> and update your browser if you don’t have the latest version.</p>
+
+<p>Now you should have a working Ruby on Rails programming setup. Congrats!</p>
+
+<hr />
+
+<h2 id="setup-for-windows">Setup for Windows</h2>
+
+<h3 id="install-rails"><em>1.</em> Install Rails</h3>
+
+<p>Download <a href="https://s3.amazonaws.com/railsinstaller/Windows/railsinstaller-3.1.0.exe">RailsInstaller</a> and run it. Click through the installer using the default options.</p>
+
+<p>Open <code>Command Prompt with Ruby on Rails</code> and run the following command:</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">rails -v</code></pre></div>
+
+<p>If the Rails version is less than 4, update it using a following command:</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">gem update rails --no-ri --no-rdoc</code></pre></div>
+
+<p>Make sure that all works well by running the application generator command.</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">rails new railsgirls
+<span class="nb">cd </span>railsgirls
+rails server</code></pre></div>
+
+<h2 id="possible-errors">Possible errors</h2>
+
+<h3 id="gemremotefetcher-error">Gem::RemoteFetcher error</h3>
+
+<p>If you get this error when running <code>rails new railsgirls</code> or <code>gem update rails</code>:</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">Gem::RemoteFetcher::FetchError: SSL_connect <span class="nv">returned</span><span class="o">=</span><span class="m">1</span> <span class="nv">errno</span><span class="o">=</span><span class="m">0</span> <span class="nv">state</span><span class="o">=</span>SSLv3 <span class="nb">read</span>
+server certificate B: certificate verify failed <span class="o">(</span>https://rubygems.org/gems/i18n-
+0.6.11.gem<span class="o">)</span></code></pre></div>
+
+<p>This means you have an older version of Rubygems and will need to update it manually first verify your Rubygems version</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">gem -v</code></pre></div>
+
+<p>If it is lower than <code>2.2.3</code> you will need to manually update it:</p>
+
+<p>First download the <a href="https://github.com/rubygems/rubygems/releases/download/v2.2.3/rubygems-update-2.2.3.gem">ruby-gems-update gem</a>. Move the file to <code>c:\\rubygems-update-2.2.3.gem</code> then run:</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">gem install --local c:<span class="se">\\</span>rubygems-update-2.2.3.gem
+update_rubygems --no-ri --no-rdoc
+gem uninstall rubygems-update -x</code></pre></div>
+
+<p>Check your version of rubygems</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">gem -v</code></pre></div>
+
+<p>Make sure it is higher than <code>2.2.3</code>. Re-run the command that was failing previously.</p>
+
+<h3 id="x64mingw-is-not-a-valid-platform-error">‘x64_mingw’ is not a valid platform` Error</h3>
+
+<p>Sometimes you get the following error when running <code>rails server</code>:
+<code>'x64_mingw' is not a valid platform</code> If you experience this error after using the RailsInstaller you have to do a small edit to the file <code>Gemfile</code>:</p>
+
+<p>Look at the bottom of the file. You will probably see something like this as one of the last lines in the file:
+<code>gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]</code>. If you have this line with <code>:x64_mingw</code>, then please delete the <code>:x64_mingw</code> part. In the end it should just say:
+<code>'tzinfo-data', platforms: [:mingw, :mswin]</code></p>
+
+<p>After you did that, please use your Command Prompt again and type <code>bundle update</code>.</p>
+
+<h3 id="install-a-text-editor-to-edit-code-files-1"><em>2.</em> Install a text editor to edit code files</h3>
+
+<p>For the workshop we recommend the text editor Atom.</p>
+
+<ul>
+  <li><a href="https://github.com/atom/atom/releases/latest">Download Atom and install it</a>
+    <ul>
+      <li>Download an atom zip file for windows and decompress it.</li>
+      <li>Copy the folder into your Program Files.</li>
+      <li>Launch atom in the folder.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>If you are using Windows Vista or older versions, you can use another editor <a href="http://www.sublimetext.com/2">Sublime Text 2</a>.</p>
+
+<p>Now you should have a working Ruby on Rails programming setup. Congrats!</p>
+
+<h3 id="update-your-browser-1"><em>3.</em> Update your browser</h3>
+
+<p>If you use Internet Explorer, we recommend installing <a href="mozilla.org/firefox">Firefox</a> or <a href="google.com/chrome">Google Chrome</a>.</p>
+
+<p>Open <a href="http://whatbrowser.org">whatbrowser.org</a> and update your browser if you don’t have the latest version.</p>
+
+<hr />
+
+<h2 id="setup-for-linux">Setup for Linux</h2>
+
+<h3 id="install-rails-1"><em>1.</em> Install Rails</h3>
+
+<p>To install the Ruby on Rails development environment you just need to copy the line below for your Linux distribution (Ubuntu or Fedora), paste it in the Terminal and press Enter. Enjoy the text flying on the screen; it will take quite some time. Grabbing a refreshing drink before starting is encouraged.</p>
+
+<h4 id="for-ubuntu">For Ubuntu:</h4>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">bash &lt; &lt;<span class="o">(</span>curl -sL https://raw.github.com/railsgirls/installation-scripts/master/rails-install-ubuntu.sh<span class="o">)</span></code></pre></div>
+
+<p>If you are going to use RVM installations with gnome-terminal, you’ll probably need to change it’s default options before you can see and use the right Ruby and Rails versions. Find out how: <a href="http://rvm.io/integration/gnome-terminal">RVM documentation</a>.</p>
+
+<h4 id="for-fedora">For Fedora:</h4>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">bash &lt; &lt;<span class="o">(</span>curl -sL https://raw.github.com/railsgirls/installation-scripts/master/rails-install-fedora.sh<span class="o">)</span></code></pre></div>
+
+<p>Make sure that all works well by running the application generator command.</p>
+
+<p>Make sure that all works well by running the application generator command.</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">rails new railsgirls
+<span class="nb">cd </span>railsgirls
+rails server</code></pre></div>
+
+<h3 id="install-a-text-editor-to-edit-code-files-2"><em>2.</em> Install a text editor to edit code files</h3>
+
+<p>For the workshop we recommend the text editor Sublime Text.</p>
+
+<ul>
+  <li><a href="http://www.sublimetext.com/2">Download Sublime Text and install it</a></li>
+</ul>
+
+<h3 id="update-your-browser-2"><em>3.</em> Update your browser</h3>
+
+<p>Open <a href="http://whatbrowser.org">whatbrowser.org</a> and update your browser if you don’t have the latest version.</p>
+
+<p>Now you should have a working Ruby on Rails programming setup. Congrats!</p>
+
+<hr />
+
+<h2 id="virtual-machine">Virtual Machine</h2>
+
+<p>Instead of installing all tools on your machine, you can also set up a development environment in a Virtual Machine. Please find all the details <a href="/virtual-machine">here</a>.</p>
+
+<hr />
+
+<h2 id="using-a-cloud-service">Using a Cloud Service</h2>
+
+<p>Instead of installing Ruby on Rails and an editor on your computer, you can use a webservice for development. All you need is a browser and an internet connection. This guide explains how to get started with <a href="https://nitrous.io">nitrous.io</a>. If you’re using a different service, they may use a different wording - e.g. ‘workspace’ instead of ‘box’, but the process is usually pretty similar.</p>
+
+<h3 id="update-your-browser-3"><em>1.</em> Update your browser</h3>
+
+<p>If you use Internet Explorer, we recommend installing <a href="mozilla.org/firefox">Firefox</a> or <a href="google.com/chrome">Google Chrome</a>.</p>
+
+<p>Open <a href="http://whatbrowser.org">whatbrowser.org</a> and update your browser if you don’t have the latest version.</p>
+
+<h3 id="create-a-free-account"><em>2.</em> Create a free account</h3>
+<p>Go to <a href="https://nitrous.io/">https://nitrous.io</a> and signup for free.</p>
+
+<h3 id="setup-a-development-box--workspace-for-ruby-on-rails"><em>3.</em> Setup a development box / workspace for ruby on rails</h3>
+<ul>
+  <li>Login to your nitrous account</li>
+  <li>Go to the dashboard by using the green ‘Open dashboard’ button</li>
+  <li>Create a nitrous box: pick Ruby/Rails from the templates - everything else can stay as is, but you can change the name of your box if you want to</li>
+  <li>It takes a moment until your box is ready</li>
+</ul>
+
+<h3 id="find-and-restart-your-development-box"><em>4.</em> Find and restart your development box</h3>
+<ul>
+  <li>If you’ve just created your box, you can probably skip these steps - they’re good to know if you login to nitrous again later</li>
+  <li>You can always find your nitrous boxes by going to the dashboard or choosing ‘Boxes’ from the top menu</li>
+  <li>Pick your box from the list of boxes</li>
+  <li>If you haven’t used a box in a while, it might have been shutdown due to inactivity. If you are informed that your box is not running, restart it using the respective button</li>
+  <li>When your box is up and running, choose ‘IDE’ in order to start coding</li>
+</ul>
+
+<h3 id="coding-with-your-development-box"><em>5.</em> Coding with your development box</h3>
+<ul>
+  <li>On the left hand side, you find a file browser where you can navigate your directories and file</li>
+  <li>In the middle, you find the editor where you can modify your files</li>
+  <li>At the bottom, you find the terminal where you can run commands</li>
+  <li>Everything you need is here in you browser window - you do not need to start an editor or terminal anywhere else</li>
+  <li>If your following a guide or tutorial, use the commands for Linux even if you are on a Windows computer - your operating system does not matter, since all commands are run on your development box, which is a Linux machine</li>
+  <li>If a guide or tutorial asks you to point your browser to something like http://localhost:3000, go to the ‘Preview’ menu and pick ‘Port 3000’</li>
+  <li>If, for example, you’re asked to open http://localhost:3000/posts, please append ‘/posts’ manually to the URL that has been opened</li>
+</ul>
+
+      </div>
+    </article>
+    <footer>
+      <p>
+        This work is licensed under a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0 License</a>
+      </p>
+      <p>
+        <a href="http://railsgirls.com">Rails Girls</a>
+        &middot; Crafted with excitement from Helsinki, Finland &middot; Follow us on
+        <a href="http://twitter.com/railsgirls">Twitter</a>
+        and
+        <a href="https://www.facebook.com/railsgirls">Facebook</a>
+      </p>
+    </footer>
+    <script type="text/javascript">
+      //<![CDATA[
+        var _gaq = _gaq || [];
+        _gaq.push(["_setAccount", "UA-19631067-3"]);
+        _gaq.push(["_trackPageview"]);
+
+        (function() {
+          var ga = document.createElement("script"); ga.type = "text/javascript"; ga.async = true;
+          ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";
+          var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      //]]>
+    </script>
+  </body>
+</html>

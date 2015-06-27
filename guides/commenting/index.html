@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Thêm tính năng bình luận cho ứng dụng Rails Girls - Rails Girls</title>
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="/js/prefixfree.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <script src="/js/jquery.cookie.js"></script>
+    <script src="/js/guides.js"></script>
+    <link href="/css/bootstrap.css" rel="stylesheet" />
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet" />
+    <link href="/css/code.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
+    <link href="/favicon.png" rel="shortcut icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <a class="span3" href="/" id="logo">
+          <img alt="Rails Girls Guides" src="/images/railsgirls-guides.png" />
+        </a>
+        <nav></nav>
+      </div>
+    </header>
+    <article class="container">
+      <div class="span10">
+        <h1 id="thm-tnh-nng-bnh-lun-cho-ng-dng-rails-girls">Thêm tính năng bình luận cho ứng dụng Rails Girls</h1>
+
+<p><em>Viết bởi Janika Liiv, <a href="https://twitter.com/janikaliiv">@janikaliiv</a></em></p>
+
+<p>Chúng ta sẽ bổ sung thêm khả năng thêm bình luận (comment) vào ý tưởng (idea) cho ứng dụng <em>railsgirls</em>.</p>
+
+<p>Hướng dẫn cài đặt Rails và xây dựng ứng dụng ý tưởng (idea) có thể xem <a href="/app">tại đây</a>.</p>
+
+<h2 id="to-scaffold-cho-bnh-lun-comment"><em>1.</em> Tạo scaffold cho bình luận (comment)</h2>
+
+<p>Tạo một scaffold cho bình luận (comment), với tên người bình luận, nội dung của bình luận và tham chiếu tới bảng ý tưởng (ideas) (<code>idea_id</code>)</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">rails g scaffold comment user_name:string body:text idea_id:integer</code></pre></div>
+
+<p>Lệnh này sẽ tạo ra một tệp tin migration có tác dụng thông báo cho cơ sở dữ liệu (database) về bảng comments mới. Chạy các tệp tin migrations với</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">rake db:migrate</code></pre></div>
+
+<h2 id="thm-quan-h-vo-cc-models"><em>2.</em> Thêm quan hệ vào các models</h2>
+
+<p>Bạn cần đảm bảo rằng Rails biết về mối quan hệ giữa các đối tượng (ở đây là <strong>ideas</strong> và <strong>comments</strong>). Vì một ý tưởng (idea) có thể có nhiều bình-luận (comments) nên chúng ta cần đảm bảo model Idea biết điều này.</p>
+
+<p>Mở <code>app/models/idea.rb</code> và dưới dòng</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Idea</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span></code></pre></div>
+
+<p>thêm</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">has_many</span> <span class="ss">:comments</span></code></pre></div>
+
+<p>The comment also has to know that it belongs to an idea. So open <code>app/models/comment.rb</code> and after</p>
+
+<p>Bình-luận (comment) cũng cần phải biết rằng nó thuộc về một ý tưởng (idea). Nên hãy mở <code>app/models/comment.rb</code> và sau dòng</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Comment</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span></code></pre></div>
+
+<p>thêm</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">belongs_to</span> <span class="ss">:idea</span></code></pre></div>
+
+<h2 id="hin-th-biu-mu-thm-bnh-lun-comment-form-v-cc-bnh-lun--c"><em>3.</em> Hiển thị biểu mẫu thêm bình-luận (comment form) và các bình luận đã có</h2>
+
+<p>Mở <code>app/views/ideas/show.html.erb</code> và sau <code>image_tag</code></p>
+
+<div class="highlight"><pre><code class="language-erb" data-lang="erb"><span class="cp">&lt;%=</span> <span class="n">image_tag</span><span class="p">(</span><span class="vi">@idea</span><span class="o">.</span><span class="n">picture_url</span><span class="p">,</span> <span class="ss">:width</span> <span class="o">=&gt;</span> <span class="mi">600</span><span class="p">)</span> <span class="k">if</span> <span class="vi">@idea</span><span class="o">.</span><span class="n">picture</span><span class="o">.</span><span class="n">present?</span> <span class="cp">%&gt;</span><span class="x"></span></code></pre></div>
+
+<p>thêm</p>
+
+<div class="highlight"><pre><code class="language-erb" data-lang="erb"><span class="x">&lt;h3&gt;Comments&lt;/h3&gt;</span>
+<span class="cp">&lt;%</span> <span class="vi">@comments</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">comment</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">  &lt;div&gt;</span>
+<span class="x">    &lt;strong&gt;</span><span class="cp">&lt;%=</span> <span class="n">comment</span><span class="o">.</span><span class="n">user_name</span> <span class="cp">%&gt;</span><span class="x">&lt;/strong&gt;</span>
+<span class="x">    &lt;br /&gt;</span>
+<span class="x">    &lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="n">comment</span><span class="o">.</span><span class="n">body</span> <span class="cp">%&gt;</span><span class="x">&lt;/p&gt;</span>
+<span class="x">    &lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Delete&#39;</span><span class="p">,</span> <span class="n">comment_path</span><span class="p">(</span><span class="n">comment</span><span class="p">),</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:delete</span><span class="p">,</span> <span class="ss">data</span><span class="p">:</span> <span class="p">{</span> <span class="ss">confirm</span><span class="p">:</span> <span class="s1">&#39;Are you sure?&#39;</span> <span class="p">}</span> <span class="cp">%&gt;</span><span class="x">&lt;/p&gt;</span>
+<span class="x">  &lt;/div&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="cp">&lt;%=</span> <span class="n">render</span> <span class="s1">&#39;comments/form&#39;</span> <span class="cp">%&gt;</span><span class="x"></span></code></pre></div>
+
+<p>Trong <code>app/controllers/ideas_controller.rb</code> thêm vào action <code>show</code> sau dòng</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="vi">@idea</span> <span class="o">=</span> <span class="no">Idea</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span></code></pre></div>
+
+<p>đoạn code sau</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="vi">@comments</span> <span class="o">=</span> <span class="vi">@idea</span><span class="o">.</span><span class="n">comments</span><span class="o">.</span><span class="n">all</span>
+<span class="vi">@comment</span> <span class="o">=</span> <span class="vi">@idea</span><span class="o">.</span><span class="n">comments</span><span class="o">.</span><span class="n">build</span></code></pre></div>
+
+<p>Mở <code>app/views/comments/_form.html.erb</code> và sau đoạn</p>
+
+<div class="highlight"><pre><code class="language-erb" data-lang="erb"><span class="x">&lt;div class=&quot;field&quot;&gt;</span>
+<span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:body</span> <span class="cp">%&gt;</span><span class="x">&lt;br /&gt;</span>
+<span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_area</span> <span class="ss">:body</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">&lt;/div&gt;</span></code></pre></div>
+
+<p>thêm dòng sau</p>
+
+<div class="highlight"><pre><code class="language-erb" data-lang="erb"><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">hidden_field</span> <span class="ss">:idea_id</span> <span class="cp">%&gt;</span><span class="x"></span></code></pre></div>
+
+<p>sau đó, xóa</p>
+
+<div class="highlight"><pre><code class="language-erb" data-lang="erb"><span class="x">&lt;div class=&quot;field&quot;&gt;</span>
+<span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:idea_id</span> <span class="cp">%&gt;</span><span class="x">&lt;br&gt;</span>
+<span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">number_field</span> <span class="ss">:idea_id</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">&lt;/div&gt;</span></code></pre></div>
+
+<p>Vậy là xong. Bây giờ bạn có thể xem ý tưởng (idea) bạn đã thêm vào ứng dụng trước đây, ở đó bạn sẽ thấy các bình luận cũ và biểu mẫu để thêm bình-luận (comment) mới.</p>
+
+      </div>
+    </article>
+    <footer>
+      <p>
+        This work is licensed under a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0 License</a>
+      </p>
+      <p>
+        <a href="http://railsgirls.com">Rails Girls</a>
+        &middot; Crafted with excitement from Helsinki, Finland &middot; Follow us on
+        <a href="http://twitter.com/railsgirls">Twitter</a>
+        and
+        <a href="https://www.facebook.com/railsgirls">Facebook</a>
+      </p>
+    </footer>
+    <script type="text/javascript">
+      //<![CDATA[
+        var _gaq = _gaq || [];
+        _gaq.push(["_setAccount", "UA-19631067-3"]);
+        _gaq.push(["_trackPageview"]);
+
+        (function() {
+          var ga = document.createElement("script"); ga.type = "text/javascript"; ga.async = true;
+          ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";
+          var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      //]]>
+    </script>
+  </body>
+</html>

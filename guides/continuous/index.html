@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Continuous Deployment với Codeship - Rails Girls</title>
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="/js/prefixfree.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <script src="/js/jquery.cookie.js"></script>
+    <script src="/js/guides.js"></script>
+    <link href="/css/bootstrap.css" rel="stylesheet" />
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet" />
+    <link href="/css/code.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
+    <link href="/favicon.png" rel="shortcut icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <a class="span3" href="/" id="logo">
+          <img alt="Rails Girls Guides" src="/images/railsgirls-guides.png" />
+        </a>
+        <nav></nav>
+      </div>
+    </header>
+    <article class="container">
+      <div class="span10">
+        <h1 id="continuous-deployment-vi-codeship">Continuous Deployment với Codeship</h1>
+
+<p><em>Viết bởi Floor Drees, <a href="https://twitter.com/floordrees">@floordrees</a></em></p>
+
+<h2 id="continuous-deployment-l-g">Continuous Deployment là gì?</h2>
+
+<p>Continuous Deployment là một phần của “phong trào” chuyển phát liên tục (continuous delivery). Ý tưởng của chuyển phát liên tục là tự động hóa càng nhiều càng tốt quá trình chuyển phát phần mềm.</p>
+
+<p>Với một dây chuyền continuous deployment đang hoạt động, bạn sẽ thi hành Git deployment (triển khai ứng dụng với Git) (mọi thứ phải được commit để được test, và mọi thứ phải được test trước khi được deploy). Điều này sẽ làm cho việc phối hợp trở lên dễ dàng hơn và triển khai (deploy) ứng dụng nhanh hơn. Bạn sẽ có nhiều thời gian hơn tập trung cho phát triển ứng dụng, làm nó trở lên ngày càng tốt hơn.</p>
+
+<p>Một vài công ty tuyệt vời đang mở đường cho làn sóng continuous deployment, và trong hướng dẫn này chúng ta sẽ cùng thiết lập qui trình continuous deployment cho ứng dụng Ruby on Rails của mình từ Github tới Heroku thông qua <a href="http://www.codeship.io">Codeship</a>.</p>
+
+<p><strong>Huấn luyện viên</strong>: Nói về các lợi ích của continuous deployment.</p>
+
+<h2 id="ng-k-ti-khon-codeship">Đăng kí tài khoản Codeship</h2>
+
+<p>Đầu tiên bạn cần <a href="https://www.codeship.io/">một tài khoản Codeship</a>. Đăng nhập Codeship thông qua tài khoản Github. Codeship cần truy cập vào các repositories trong tài khoản Github của bạn để thiết lập continuous deployment, vì thế hãy chắc chắn rằng bạn cấp quyền truy cập cho Codeship.</p>
+
+<p>Trở lại với Codeship, hãy cùng khởi tạo dự án đầu tiên. Bước thứ nhất là lựa chọn GitHub làm nhà cung cấp repository. Trong danh sách các GitHub repositories, tìm repository bạn muốn cài đặt và chọn nó. Vì chúng ta đang làm ứng dụng <code>railsgirls</code> nên bạn có thể sẽ muốn chọn repository <code>railsgirls</code>.</p>
+
+<p>Bây giờ, repository của bạn đã được kết nối (với Codeship), bạn có thể thiết lập các lệnh test. Bởi vì chúng ta đang làm việc với ứng dụng Ruby on Rails nên bạn hãy chọn “Ruby on Rails” là framework đang sử dụng. Codeship sẽ dựa trên lựa chọn này tạo ra những lệnh cài đặt và test phù hợp cho ứng dụng của bạn. Các lệnh test được tạo sẵn nhưng nằm ở trạng thái comment (dòng lệnh bắt đầu với kí tự <code>#</code>), bạn có thể uncomment các lệnh muốn sử dụng. Hiện tại có thể ứng dụng của bạn chưa cài đặt test nên bạn có thể bỏ qua phần này và quay lại cài đặt sau.</p>
+
+<p>Hoàn tất quá trình thiết lập và đi tới bảng điều khiển (dashboard). Bạn có thể kích hoạt một “bản build mới” cho ứng dụng bằng việc thay đổi cái gì đó trong ứng dụng và push các thay đổi lên repository:</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">git add .
+git commit -m <span class="s2">&quot;test Codeship integration&quot;</span>
+git push origin master</code></pre></div>
+
+<p>Bạn có thể xem thông tin chi tiết về bản build bằng cách nhấn vào mũi tên phía bên phải. Bạn có thể quan sát trong khi bản build này đang chạy. Bảo đảm hay hơn chương tình truyền hình thực tế.</p>
+
+<p>… và vài giây sau, bản build chạy thành công! Bạn có thể thấy tất cả các lệnh đã được chạy: sau vài lệnh chuẩn bị ban đầu, Codeship sẽ chạy các lệnh bạn chỉ định lúc trước. Bạn có thể xem các output của một lệnh cụ thể bằng cách nhấn vào lệnh đó.</p>
+
+<p>Như vậy bạn đã vừa push code lên repository, xem log của bản build và có được một green build (bản build thành công). Chúc mừng bạn và hãy cùng sang bước tiếp theo.</p>
+
+<h2 id="ci-t-continuous-deployment">Cài đặt Continuous Deployment</h2>
+
+<p>Bây giờ, hãy cùng triển khai (deploy) ứng dụng của bạn lên Heroku. Nhấn vào thiết lập dự án (project settings) ở góc trên bên phải, chọn “Deployment” từ danh sách. Bạn sẽ được chuyển tới trang thiết lập “Deployment”. Vì chúng ta dự định triển khai dự án lên Heroku nên bạn hãy nhấn vào logo của “Heroku”.</p>
+
+<p>Bạn sẽ được đề nghị nhập tên ứng dụng của mình trên Heroku cũng như API key. Để có API key, bạn có thể vào trang <a href="https://dashboard.heroku.com/account">tài khoản của mình trên Heroku</a> và nhấn vào nút có nội dung “Show API key”. Nhập tên ứng dụng và API key của bạn và lưu thiết lập này lại.</p>
+
+<p>Vậy là từ bây giờ Codeship sẽ triển khai ứng dụng của bạn lên Heroku tự động mỗi khi bạn push code lên GitHub repository của mình. Tuyệt vời!</p>
+
+<h2 id="cng-th-nghim">Cùng thử nghiệm</h2>
+
+<p>Bây giờ hãy cùng push một thay đổi và xem thay đổi đó có được deploy hay không. Thay đổi một chút cho ứng dụng của bạn (tiêu đề ứng dụng chẳng hạn), rồi commit và push thay đổi đó lên Github.</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">git add .
+git commit -m <span class="s2">&quot;this changes everything&quot;</span>
+git push</code></pre></div>
+
+<p>Và ngay sau đó, một bản build mới sẽ bắt đầu chạy trên Codeship. Ứng dụng của bạn sẽ được triển khai tự động lên Heroku và bạn có thể thấy những thay đổi bạn vừa thực hiện trên ứng dụng của mình trên Internet chỉ sau 1 - 2 phút.</p>
+
+      </div>
+    </article>
+    <footer>
+      <p>
+        This work is licensed under a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0 License</a>
+      </p>
+      <p>
+        <a href="http://railsgirls.com">Rails Girls</a>
+        &middot; Crafted with excitement from Helsinki, Finland &middot; Follow us on
+        <a href="http://twitter.com/railsgirls">Twitter</a>
+        and
+        <a href="https://www.facebook.com/railsgirls">Facebook</a>
+      </p>
+    </footer>
+    <script type="text/javascript">
+      //<![CDATA[
+        var _gaq = _gaq || [];
+        _gaq.push(["_setAccount", "UA-19631067-3"]);
+        _gaq.push(["_trackPageview"]);
+
+        (function() {
+          var ga = document.createElement("script"); ga.type = "text/javascript"; ga.async = true;
+          ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";
+          var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      //]]>
+    </script>
+  </body>
+</html>
